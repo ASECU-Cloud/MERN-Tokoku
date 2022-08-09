@@ -6,10 +6,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 import belanjaReducer from "./features/belanja";
+import userReducer from "./features/user";
 
 const store = configureStore({
   reducer: {
     belanja: belanjaReducer,
+    user: userReducer,
   },
 });
 

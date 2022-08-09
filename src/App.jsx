@@ -22,7 +22,7 @@ function App() {
         <Route
           path="/cart"
           element={
-            <Navbar>
+            <Navbar search={true}>
               <Cart />
             </Navbar>
           }

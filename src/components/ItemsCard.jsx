@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, remToCart } from "../features/belanja";
+import { addToCart } from "../features/belanja";
 
 const ItemsCard = () => {
   const products = useSelector((state) => state.belanja.data);
@@ -49,12 +49,6 @@ const ItemsCard = () => {
             className="mt-4 text-xl w-full text-white bg-green-400 hover:bg-green-600 py-2 rounded-xl shadow-lg"
           >
             Beli
-          </button>
-          <button
-            onClick={() => dispatch(remToCart({ id, data: cart }))}
-            className="mt-4 text-xl w-full text-white bg-green-400 hover:bg-green-600 py-2 rounded-xl shadow-lg"
-          >
-            Hapus
           </button>
         </div>
       </div>

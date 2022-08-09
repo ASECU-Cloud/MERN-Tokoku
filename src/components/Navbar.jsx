@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Navbar({ children, search }) {
+  const username = useSelector((state) => state.user.username);
+
   const buttn = () => {
     if (search) {
       alert("yatta");
@@ -19,7 +22,7 @@ function Navbar({ children, search }) {
         <Link to={"/"}>
           <p className="font-extrabold text-2xl underline">TokoKu</p>
         </Link>
-        {search === true && (
+        {!search === true && (
           <div className="text-gray-800 flex">
             <input
               onChange={searchkeyword}
@@ -63,9 +66,16 @@ function Navbar({ children, search }) {
                 </svg>
               </Link>
             </div>
-            <Link to={"/login"}>
-              <div className="text-2xl">Login</div>
-            </Link>
+            {username && (
+              <Link to={"/Profile"}>
+                <div className="text-2xl">Halo {username}</div>
+              </Link>
+            )}
+            {!username && (
+              <Link to={"/login"}>
+                <div className="text-2xl">Login</div>
+              </Link>
+            )}
           </div>
         )}
       </div>

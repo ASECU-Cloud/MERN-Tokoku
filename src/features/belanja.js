@@ -20,6 +20,9 @@ const belanjaSlice = createSlice({
   name: "belanja",
   initialState,
   reducers: {
+    stateInit: (state, action) => {
+      state = initialState;
+    },
     alterKategori: (state, action) => {
       if (action.payload.data === initialState.data) {
         const res = initialState.data.filter(
@@ -54,7 +57,7 @@ const belanjaSlice = createSlice({
           return { ...items };
         })[0];
       res.total = 1;
-      console.log(res);
+
       // membuat item bisa di alter dengan mengcopy object dari payload
       let data = action.payload.cart.map((item) => {
         return { ...item };
@@ -65,38 +68,44 @@ const belanjaSlice = createSlice({
       } else {
         state.cart = [...state.cart, res];
       }
-
-      // check process
-      // if (data.length === 0) {
-      //   res[0].total = 1;
-      //   console.log(...res);
-      //   state.cart = [...state.cart, ...res];
-      // } else {
-      //   res[0].total = data[0].total;
-      //   res[0].total++;
-      //   console.log(...res);
-      //   state.cart = [...res];
-      // }
     },
-    remToCart: (state, action) => {
-      let source = action.payload.data;
-      const target = action.payload.data.findIndex(
-        (res) => res.id === action.payload.id
+    modSum: (state, action) => {
+      let data = action.payload.carts.map((item) => {
+        return { ...item };
+      });
+      let target = action.payload.carts.findIndex(
+        (res) => res.id === Number(action.payload.id)
       );
 
-      source = source.map((items) => {
-        return { ...items };
-      });
+      data[target].total++;
 
-      console.log(source);
-      if (target !== -1) {
-        source.splice(target, 1);
-        state.cart = [...source];
+      state.cart[target] = { ...data[target] };
+    },
+    modMin: (state, action) => {
+      let data = action.payload.carts.map((item) => {
+        return { ...item };
+      });
+      let target = action.payload.carts.findIndex(
+        (res) => res.id === Number(action.payload.id)
+      );
+
+      data[target].total--;
+
+      if (data[target].total === 0) {
+        data.splice(target, 1);
+
+        state.cart = [...data];
+        if (data.length === 0) {
+          state.cart = [];
+        }
+      } else {
+        state.cart[target] = data[target];
       }
     },
   },
 });
 
-export const { alterKategori, addToCart, remToCart } = belanjaSlice.actions;
+export const { stateInit, alterKategori, addToCart, modSum, modMin } =
+  belanjaSlice.actions;
 
 export default belanjaSlice.reducer;
