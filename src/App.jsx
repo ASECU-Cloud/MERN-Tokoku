@@ -42,7 +42,7 @@ function App() {
           path="*"
           element={
             <div className="text-center py-72 h-screen ">
-              <h1 className="text-2xl font-bold">404 - NOT FOUND</h1>
+              <h1 className="text-2xl font-bold">404 - NOT FOUND !</h1>
               <p>
                 Return to{" "}
                 <Link to={"/"} className="underline">
