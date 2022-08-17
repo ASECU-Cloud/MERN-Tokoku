@@ -45,12 +45,13 @@ const Login = () => {
             type: "login",
           })
         );
+      } else {
+        throw Error("error tryRegister");
       }
+      navigate("/");
     } catch (error) {
       console.warn(error);
     }
-
-    // navigate("/");
   };
 
   const handleLogin = async (e) => {
@@ -60,14 +61,17 @@ const Login = () => {
       return;
     }
     try {
-      const result = await fetch(" http://localhost:4000/user/login", {
-        method: "POST",
+      const result = await fetch(
+        " https://backend-tokoku.herokuapp.com/user/login",
+        {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      }).then((data) => data.json());
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      ).then((data) => data.json());
       if (result.hasOwnProperty("error")) {
         throw Error(result.error);
       }
