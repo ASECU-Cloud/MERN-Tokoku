@@ -42,12 +42,15 @@ const Profile = () => {
   useEffect(() => {
     async function fetchRiwayat() {
       try {
-        const res = await fetch("http://localhost:4000/api/toko/" + user._id, {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }).then((e) => e.json());
+        const res = await fetch(
+          "https://backend-tokoku.herokuapp.com/api/toko/" + user._id,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ).then((e) => e.json());
 
         return setRiwayat(res);
       } catch (error) {
