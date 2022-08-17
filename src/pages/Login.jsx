@@ -24,13 +24,16 @@ const Login = () => {
     }
 
     try {
-      const call = await fetch("http://localhost:4000/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password, name, phone, address }),
-      }).then((e) => e.json());
+      const call = await fetch(
+        "https://backend-tokoku.herokuapp.com/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password, name, phone, address }),
+        }
+      ).then((e) => e.json());
       console.log(call);
       if (!call.error) {
         dispatch(
