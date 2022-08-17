@@ -42,14 +42,17 @@ const Cart = () => {
     }
     const token = "Bearer " + user.token;
     try {
-      const result = await fetch("http://localhost:4000/api/toko/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: token,
-        },
-        body: JSON.stringify({ _id: user._id, items: carts }),
-      }).then((e) => e.json());
+      const result = await fetch(
+        "https://backend-tokoku.herokuapp.com/api/toko/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+          body: JSON.stringify({ _id: user._id, items: carts }),
+        }
+      ).then((e) => e.json());
       alert("Pembelian diproses !!!!");
       if (result.hasOwnProperty("error")) {
         throw Error(result.error);
